@@ -1,0 +1,422 @@
+
+1. What is a data structure?
+
+A data structure is a way of organizing and storing data in a computer so that we can access and process it efficiently.
+
+Imagine you have five student marks:
+
+80, 90, 70, 60, 100
+
+Without an array, you might store them like this:
+
+int mark1 = 80;
+int mark2 = 90;
+int mark3 = 70;
+int mark4 = 60;
+int mark5 = 100;
+
+But what if you have 1,000 students? Creating 1,000 variables is inconvenient.
+
+That's why we use an array.
+
+2. Array definition
+An array is a linear data structure that stores a fixed number of elements of the same type, accessed using an index.
+
+Let's break this down.
+
+Linear: Elements are arranged in a sequence.
+
+Same type: An int[] stores integers, a char[] stores characters.
+
+Fixed size: A Java array's length cannot change after creation.
+
+Index: Every element has a position starting from 0.
+
+3. How does an array store data?
+Array: int[] arr = {10, 20, 30, 40, 50};
+
+10
+Index 0
+
+20
+Index 1
+
+30
+Index 2
+
+40
+Index 3
+
+50
+Index 4
+
+Index starts at 0, not 1. The last index is length − 1.
+
+Java arrays store their elements in consecutive array slots. For primitive int arrays, each element contains an integer value. For arrays of objects, each slot stores a reference to an object.
+
+Conceptually, the computer can locate an element using its starting storage location and index.
+
+For example:
+
+arr[0]  // 10
+arr[1]  // 20
+arr[2]  // 30
+arr[3]  // 40
+arr[4]  // 50
+
+4. How to create an array in Java
+// Method 1: Direct initialization
+int[] arr = {10, 20, 30, 40, 50};
+
+// Method 2: Create an empty integer array
+int[] numbers = new int[5];
+
+// Assign values
+numbers[0] = 10;
+numbers[1] = 20;
+
+// Array length
+System.out.println(arr.length); // 5
+
+An int array created with new int[5] initially contains five zeroes.
+
+5. How to traverse an array
+Traversal means visiting elements one by one.
+
+int[] arr = {10, 20, 30, 40, 50};
+
+for (int i = 0; i < arr.length; i++) {
+    System.out.println(arr[i]);
+}
+
+Output:
+
+10
+20
+30
+40
+50
+Remember these four concepts
+
+arr[i] → Access an element
+
+arr.length → Number of elements
+
+i++ → Move to the next index
+
+arr.length - 1 → Last valid index
+
+Question 1: Reverse an Array
+Easy Two Pointers Frequently used foundational pattern
+
+1. Problem statement
+Given an integer array of size N, reverse its elements.
+
+Reversing means the first element becomes the last, the second becomes the second-last, and so on.
+
+Example input:
+
+N = 5
+arr = [10, 20, 30, 40, 50]
+Expected output:
+
+[50, 40, 30, 20, 10]
+2. Understand visually
+Original array
+
+10
+
+0
+20
+
+1
+30
+
+2
+40
+
+3
+50
+
+4
+Reverse the order
+
+Reversed array
+
+50
+
+0
+40
+
+1
+30
+
+2
+20
+
+3
+10
+
+4
+3. Approach 1 — Brute force
+What is brute force?
+
+Brute force is a straightforward way to solve a problem, usually without focusing on optimizing time or memory.
+
+For this problem, create a second array and copy the elements in reverse order.
+
+Algorithm:
+
+Create a new array of the same length.
+
+Start reading the original array from the last index.
+
+Copy each element into the new array from left to right.
+
+Print the reversed array.
+
+Java code — Brute force
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40, 50};
+        int n = arr.length;
+
+        int[] reverse = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            reverse[i] = arr[n - 1 - i];
+        }
+
+        System.out.println(Arrays.toString(reverse));
+    }
+}
+
+Output:
+
+[50, 40, 30, 20, 10]
+Brute force dry run
+i
+
+n - 1 - i
+
+Value copied
+
+0
+
+4
+
+50
+
+1
+
+3
+
+40
+
+2
+
+2
+
+30
+
+3
+
+1
+
+20
+
+4
+
+0
+
+10
+
+Final array: [50, 40, 30, 20, 10]
+
+4. Approach 2 — Optimal (Two Pointers)
+What are two pointers?
+
+Two pointers is a technique where we use two index variables to navigate an array.
+
+For reversing:
+
+left starts at index 0.
+
+right starts at index n - 1.
+
+Swap the elements at those positions.
+
+Move left forward and right backward.
+
+Stop when left >= right.
+
+This reverses the original array without creating another array.
+
+Interactive dry run
+Two-pointer visualization
+
+Step 1 of 4
+
+LEFT
+
+10
+0
+20
+1
+30
+2
+40
+3
+RIGHT
+
+50
+4
+Start: left = 0, right = 4. Swap 10 and 50.
+
+5. Optimal Java code
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 40, 50};
+
+        int left = 0;
+        int right = arr.length - 1;
+
+        while (left < right) {
+            int temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+
+            left++;
+            right--;
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+}
+
+Understand every important line
+Code
+
+Meaning
+
+left = 0
+
+Start at the first element
+
+right = arr.length - 1
+
+Start at the last element
+
+while (left < right)
+
+Continue until pointers meet or cross
+
+temp = arr[left]
+
+Save the left value
+
+arr[left] = arr[right]
+
+Copy right value to left
+
+arr[right] = temp
+
+Complete the swap
+
+left++
+
+Move one step right
+
+right--
+
+Move one step left
+
+6. Time and space complexity — From zero
+What is time complexity?
+Time complexity describes how the number of operations grows as the input size N increases.
+
+We use Big O notation, such as O(1), O(N) and O(N²).
+
+See how common complexities grow
+
+Input size (N)
+10
+
+O(1) — Constant
+
+1 operation
+O(log N) — Logarithmic
+
+~4 operations
+
+O(N) — Linear
+
+10 operations
+
+O(N²) — Quadratic
+
+100 operations
+
+Illustrative growth rates, not exact execution times.
+Complexity of our two solutions
+Approach
+
+Time
+
+Extra space
+
+Brute force (new array)
+
+O(N)
+
+O(N)
+
+Optimal (two pointers)
+
+O(N)
+
+O(1)
+
+Why is optimal time O(N)?
+
+Because we swap approximately N / 2 pairs. Big O ignores constant factors, so O(N/2) becomes O(N).
+
+Why is optimal space O(1)?
+
+Because we use only three extra variables: left, right, and temp. The amount of extra memory does not grow with N.
+
+Interview insight: Both approaches take linear time, but the two-pointer solution is better in auxiliary space because it modifies the array in place.
+
+7. How to explain this in an Infosys interview
+I will use the two-pointer technique. I initialize one pointer at the beginning and another at the end of the array. I swap their elements and move both pointers toward the center. I repeat until the pointers meet or cross. The algorithm takes O(N) time and O(1) extra space because I reverse the array in place.
+
+8. Edge cases
+Input
+
+Output
+
+[5]
+
+[5]
+
+[1, 2]
+
+[2, 1]
+
+[7, 7, 7]
+
+[7, 7, 7]
+
+[]
+
+[]
+
+[-3, 0, 5]
+
+[5, 0, -3]
