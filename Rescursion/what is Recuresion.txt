@@ -8,3 +8,6 @@ solution to Smaller Instance of the Same problem.
 1 Base case - Final case
 2. kaam 
 3. Inner Case
+
+Resursion ---------->
+<----------Iteration 
