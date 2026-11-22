@@ -1,0 +1,10 @@
+Resursion is a method of solving a computational problem where the solution depend on 
+solution to Smaller Instance of the Same problem.
+
+/-> Resursion is a Technique where a function call itself to solve a problem step by step.
+
+
+
+1 Base case - Final case
+2. kaam 
+3. Inner Case
