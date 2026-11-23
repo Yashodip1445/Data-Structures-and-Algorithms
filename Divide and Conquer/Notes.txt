@@ -1,0 +1,6 @@
+1. What is Divide and Conquer 
+
+
+Divide and conquer is stregy where a problem is divide into
+smallerindependent subproblem, solved separeately 
+and then theri solution are combined to get the final result 
